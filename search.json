@@ -1,0 +1,142 @@
+[
+  {
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Introduction",
+    "text": "Introduction\n\nWebR is a version of the R statistical programming language that can run entirely in a web browser.\n\n\nWhy run software in a browser?\n\n\nLots of potential reasons!\n\n\n\n\nContainerisation\nSandboxing\nInteractivity\n\n\n\nReproducibility\nSoftware portability\nUniversal binaries\n\n\n\n\n\n\nLet me tell a story about my original reasons for creating webR…"
+  },
+  {
+    "objectID": "index.html#how-can-we-evaluate-r-code-on-devices-without-r",
+    "href": "index.html#how-can-we-evaluate-r-code-on-devices-without-r",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "How can we evaluate R code on devices without R?",
+    "text": "How can we evaluate R code on devices without R?"
+  },
+  {
+    "objectID": "index.html#existing-solutions-rely-on-an-external-r-server",
+    "href": "index.html#existing-solutions-rely-on-an-external-r-server",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Existing solutions rely on an external R server",
+    "text": "Existing solutions rely on an external R server"
+  },
+  {
+    "objectID": "index.html#solution-evaluate-r-code-locally-inside-a-web-browser",
+    "href": "index.html#solution-evaluate-r-code-locally-inside-a-web-browser",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Solution: Evaluate R code locally inside a web browser!",
+    "text": "Solution: Evaluate R code locally inside a web browser!\n\n\n\n\nWebR allows you to move computation of R code from server-side hardware to client devices"
+  },
+  {
+    "objectID": "index.html#examples-of-some-r-servers",
+    "href": "index.html#examples-of-some-r-servers",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Examples of some R servers",
+    "text": "Examples of some R servers\nOn-prem:\n\nA workstation, under a desk, running RStudio\nA server, in a rack, running Shiny Server\nPosit Connect enterprise hosting\n\n\nCloud:\n\nShinyApps.io\nPosit on Hugging Face\nAWS/Google Cloud/Azure enterprise cloud hosting"
+  },
+  {
+    "objectID": "index.html#static-web-hosting",
+    "href": "index.html#static-web-hosting",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Static web hosting",
+    "text": "Static web hosting\nSome web services offer an excellent mix of scalability, features, and cost:\n\nGithub Pages\nNetlify\nCloudflare Pages\nVercel\nQuarto Pub\nProbably lots more…\n\n\nThis is static hosting. No way to run dynamic R code on the server."
+  },
+  {
+    "objectID": "index.html#webassembly-2017",
+    "href": "index.html#webassembly-2017",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "WebAssembly (2017)",
+    "text": "WebAssembly (2017)\n\n\n\nA portable binary code format\nEnables high-performance applications on web pages\nNear-native execution speed\nSupported by most modern browsers"
+  },
+  {
+    "objectID": "index.html#emscripten-2012",
+    "href": "index.html#emscripten-2012",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Emscripten (2012)",
+    "text": "Emscripten (2012)\n\n\n\n\n\nC/C++ compiler for WebAssembly\nBased on LLVM/Clang\nOriginally designed for ASM.js in web browsers\nDOSBox, SQLite, Pyodide, …"
+  },
+  {
+    "objectID": "index.html#webr-demo-application-httpswebr.r-wasm.orgv0.2.2",
+    "href": "index.html#webr-demo-application-httpswebr.r-wasm.orgv0.2.2",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "WebR Demo Application 🔗 https://webr.r-wasm.org/v0.2.2/",
+    "text": "WebR Demo Application 🔗 https://webr.r-wasm.org/v0.2.2/"
+  },
+  {
+    "objectID": "index.html#features",
+    "href": "index.html#features",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Features",
+    "text": "Features\n\nR code editor, multi document support, syntax highlighting\nContext aware autocompletion\nFolder and file management tools\nMultiple plots, manage and clear plot history\nScreen reader support in R console\nWorks on wide-ranging devices: mobile, tablet, chromebook"
+  },
+  {
+    "objectID": "index.html#live-and-interactive-data-visualisation",
+    "href": "index.html#live-and-interactive-data-visualisation",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Live and interactive data visualisation",
+    "text": "Live and interactive data visualisation"
+  },
+  {
+    "objectID": "index.html#notebooks-with-jupyterlite",
+    "href": "index.html#notebooks-with-jupyterlite",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Notebooks with Jupyterlite",
+    "text": "Notebooks with Jupyterlite\n\n🔗 https://jupyter.r-wasm.org/lab/index.html"
+  },
+  {
+    "objectID": "index.html#r-packages",
+    "href": "index.html#r-packages",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "R packages",
+    "text": "R packages\nBinary R packages for Wasm are available, hosed at https://repo.r-wasm.org\n\n\n\nwebR 0.2.2: 10483 packages (about 51% of CRAN) - Note: not all have been tested"
+  },
+  {
+    "objectID": "index.html#anyone-can-create-their-own-serverless-shiny-apps",
+    "href": "index.html#anyone-can-create-their-own-serverless-shiny-apps",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Anyone can create their own serverless Shiny apps!",
+    "text": "Anyone can create their own serverless Shiny apps!"
+  },
+  {
+    "objectID": "index.html#shinylive-online-editor-httpsshinylive.iorexamples",
+    "href": "index.html#shinylive-online-editor-httpsshinylive.iorexamples",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Shinylive Online editor 🔗 https://shinylive.io/r/examples/",
+    "text": "Shinylive Online editor 🔗 https://shinylive.io/r/examples/"
+  },
+  {
+    "objectID": "index.html#shinylive-online-editor-sharing-apps",
+    "href": "index.html#shinylive-online-editor-sharing-apps",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Shinylive Online editor: Sharing apps",
+    "text": "Shinylive Online editor: Sharing apps\n\n\n\nShare a Shiny app with anyone using a single URL: Example Shinylive App\nShare a Shiny app from a GitHub Gist: https://shinylive.io/py/app/#gist=e62218aa28bf26e785fc6cb99efe8efe\n🔗 App source code"
+  },
+  {
+    "objectID": "index.html#convert-a-shiny-app",
+    "href": "index.html#convert-a-shiny-app",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Convert a Shiny app",
+    "text": "Convert a Shiny app\nInstall the Shinylive R package:\ninstall.packages(\"pak\")\npak:pak(\"posit-dev/r-shinylive\")\n\n Convert the app:\nshinylive::export(\"myapp\", \"site\")\n\n\n Preview the application:\nhttpuv::runStaticServer(\"site\")\n Ready to be uploaded to GitHub Pages or other static web hosting"
+  },
+  {
+    "objectID": "index.html#shinylive-quarto-extension",
+    "href": "index.html#shinylive-quarto-extension",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Shinylive Quarto extension",
+    "text": "Shinylive Quarto extension\nFirst, in a terminal run the command:\nquarto add quarto-ext/shinylive"
+  },
+  {
+    "objectID": "index.html#future-work-and-current-issues",
+    "href": "index.html#future-work-and-current-issues",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Future work and current issues",
+    "text": "Future work and current issues\n\nShinylive is experimental! Things are still very much in flux\n\n\n\nNot all R packages work in Wasm\nBrowser security restrictions: very limited networking, no raw socket access\nMoving data into and out of the virtual Wasm environment is clunky at the moment\n\n\n\n\nThere are no secrets in a Shinylive app!"
+  },
+  {
+    "objectID": "index.html#links",
+    "href": "index.html#links",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Links",
+    "text": "Links\n🔗 webR demo website\nhttps://webr.r-wasm.org/v0.2.2/\n🌎 Shinylive for R examples\nhttps://shinylive.io/r/\n📦 NPM (for JS Developers)\nnpm install webr\n📙 Docs\nhttps://docs.r-wasm.org/webr/v0.2.2/\nhttps://github.com/quarto-ext/shinylive"
+  }
+]

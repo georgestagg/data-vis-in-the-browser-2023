@@ -1,0 +1,1 @@
+Sitemap: https://georgestagg.github.io/data-vis-in-the-browser-2023/sitemap.xml
