@@ -1,0 +1,416 @@
+---
+title: "<img alt='webR logo' width='500px' src='images/webr.png'></img><br>Data Visualisation in the browser:<br>WebAssembly & webR"
+author: "George Stagg<br>Senior Software Engineer, Posit PBC"
+format:
+  revealjs:
+    theme:
+     - "default"
+     - "custom.scss"
+    width: "1600"
+    height: "900"
+    mermaid:
+      theme: default
+    mermaid-format: png
+revealjs-plugins:
+  - ace
+filters:
+  - shinylive
+---
+
+## Introduction
+
+```{=html}
+<script src="webr-reveal.js"></script>
+```
+
+[WebR](https://docs.r-wasm.org/) is a version of the R statistical programming language that can run entirely in a web browser.
+
+. . .
+
+::: {style="margin-top: 1em; font-weight: bold;"}
+Why run software in a browser?
+:::
+
+::: {style="margin-top: 1em; margin-bottom: 1em;"}
+Lots of potential reasons!
+:::
+
+::: columns
+::: {.column width="50%"}
+-   Containerisation
+-   Sandboxing
+-   Interactivity
+:::
+
+::: {.column width="50%"}
+-   Reproducibility
+-   Software portability
+-   Universal binaries
+:::
+:::
+
+. . .
+
+::: {style="font-size: 1.2em; margin-top: 2em;"}
+Let me tell a story about my original reasons for creating webR...
+:::
+
+## How can we evaluate R code on devices without R?
+
+::: {style="text-align: center; margin-top: 2em;"}
+![](images/intro1.png){style="width:80%"}
+:::
+
+## Existing solutions rely on an external R server
+
+::: {style="text-align: center; margin-top: 1em;"}
+![](images/intro2.png){style="width:45%"}
+:::
+
+------------------------------------------------------------------------
+
+::: {style="text-align: center; margin-top: -1em;"}
+![](images/intro3.png){style="width:60%"}
+:::
+
+------------------------------------------------------------------------
+
+::: {style="text-align: center; margin-top: -1em;"}
+![](images/intro4.png){style="width:60%"}
+:::
+
+## Solution: Evaluate R code locally inside a web browser!
+
+::: {style="text-align: center; margin-top: 2em;"}
+![](images/intro5.png){style="width:25%"}
+:::
+
+::: {style="font-size:150%; font-weight: bold; text-align: center;"}
+WebR allows you to move computation of R code from server-side hardware to client devices
+:::
+
+## Examples of some R servers
+
+On-prem:
+
+ * A workstation, under a desk, running [RStudio](https://posit.co/products/open-source/rstudio/)
+ * A server, in a rack, running [Shiny Server](https://posit.co/products/open-source/shinyserver/)
+ * [Posit Connect](https://posit.co/products/enterprise/connect/) enterprise hosting
+
+. . .
+
+Cloud:
+
+ * [ShinyApps.io](shinyapps.io)
+ * Posit on [Hugging Face](https://huggingface.co/posit)
+ * [AWS](https://aws.amazon.com)/[Google Cloud](https://cloud.google.com)/[Azure](https://azure.microsoft.com) enterprise cloud hosting
+
+## Static web hosting
+
+Some web services offer an excellent mix of scalability, features, and cost:
+
+* [Github Pages](https://pages.github.com)
+* [Netlify](https://www.netlify.com)
+* [Cloudflare Pages](https://www.netlify.com)
+* [Vercel](https://vercel.com)
+* [Quarto Pub](https://quartopub.com)
+* Probably lots more...
+
+. . .
+
+This is [static]{.em} hosting. No way to run dynamic R code on the server.
+
+## WebAssembly (2017)
+
+::: columns
+::: {.column width="50%"}
+-   A portable binary code format
+-   Enables high-performance applications on web pages
+-   Near-native execution speed
+-   Supported by most modern browsers
+:::
+
+::: {.column width="50%" style="text-align:center"}
+![](images/wasm.svg){style="width:50%"}
+:::
+:::
+
+## Emscripten (2012)
+
+::: columns
+
+::: {.column width="50%" style="text-align:center"}
+![](images/emcc.png){style="width:60%"}
+:::
+
+::: {.column width="50%"}
+-   C/C++ compiler for WebAssembly
+-   Based on LLVM/Clang
+-   Originally designed for ASM.js in web browsers
+-   DOSBox, SQLite, Pyodide, ...
+:::
+:::
+
+
+## WebR Demo Application <span style="font-size: 50%">🔗 <https://webr.r-wasm.org/v0.2.2/></span>
+
+<iframe class="web zoomed" allow="cross-origin-isolated" width="80%" height="70%" src="https://webr.r-wasm.org/v0.2.1/">
+
+</iframe>
+
+## Features
+
+-   R code editor, multi document support, syntax highlighting
+
+-   Context aware autocompletion
+
+-   Folder and file management tools
+
+-   Multiple plots, manage and clear plot history
+
+-   Screen reader support in R console
+
+-   Works on wide-ranging devices: mobile, tablet, chromebook
+
+## Live and interactive data visualisation
+
+```{=html}
+<script>
+  insertAceWebR(
+  document.currentScript,
+    `ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = species), size = 3, na.rm = TRUE) +
+  labs(title = "Penguin size, Palmer Station LTER",
+       subtitle = "Flipper length and body mass for Adelie, Chinstrap and Gentoo Penguins",
+       x = "Flipper length (mm)", y = "Body mass (g)",
+       color = "Penguin species", shape = "Penguin species")`,
+    { height: 180, canvas: { width: 1000, height: 500 } }
+  );
+</script>
+```
+
+## Notebooks with Jupyterlite
+
+* 🔗 <https://jupyter.r-wasm.org/lab/index.html>
+
+::: {style="text-align: center"}
+![](images/jupyter.png){style="width: 80%"}
+:::
+
+## R packages
+
+Binary R packages for Wasm are available, hosed at <https://repo.r-wasm.org>
+
+::: {style="text-align: center"}
+![](images/repo.png){style="width: 60%"}
+:::
+
+**webR 0.2.2:** 10483 packages (about 51% of CRAN) - Note: not all have been tested
+
+
+## Anyone can create their own serverless Shiny apps!
+
+
+![](images/shiny-homepage.png){style="margin-left: 5%; width: 90%; border: 1px solid #889; box-shadow: 2px 2px 15px #889;"}
+
+---
+
+::: {style="text-align: center; font-size: 150%; margin-top:1em;"}
+Option 1: [Shinylive online editor](https://shinylive.io/r/examples/)
+:::
+
+. . .
+
+::: {style="text-align: center; font-size: 150%; margin-top:1em;"}
+Option 2: [Convert a Shiny app](https://github.com/posit-dev/r-shinylive)
+:::
+
+. . .
+
+::: {style="text-align: center; font-size: 150%; margin-top:1em;"}
+Option 3: [Embed a Shiny app with Quarto](https://github.com/quarto-ext/shinylive)
+:::
+
+## Shinylive Online editor <span style="font-size: 50%">🔗 <https://shinylive.io/r/examples/></span>
+
+::: {style="text-align: center"}
+![](images/shinylive-editor.png){style="width: 90%; border: 1px solid #889; box-shadow: 2px 2px 15px #889;"}
+:::
+
+## Shinylive Online editor: Sharing apps
+
+::: {style="text-align: center"}
+![](images/share.png){style="width: 60%"}
+:::
+
+Share a Shiny app with anyone using a single URL: [Example Shinylive App](https://shinylive.io/r/editor/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IdJiw4ATKKSic4pTsIgiAxAAIAIjKjrUjOAFp9RAnE6c+Ac3WG7hteoAqAdzhQA1utLc46oSgwAeoAbiy0UPTUfqRE6txQIX4QtGaM6gBmUASx6dSRcNSctobqlhBm3rycjpJE5hAA5KTqBtSs6iTqUPzqAK7y6XyofYq46m7qBD3qdVW0xSSVMmWyjKR9qI49klUU-fJ7oVDUfTHcjER9VtxXLT5+dBkKtPCdGUdoWxAwqFbasnUAB5SjBSNNGDUfn8AVAACSwYGlLI5IiMdi-f46BEwcb5eiFYoAXim7ACAEFRkQYDJUgFxgEALI9PonAICZQiRyaOAZPh+ACqAElMmj1DBaNFiqg4OkrCdqF0viU7CI+rQkZlTrRJAAFKBWOBklQQdTqDTk9DeWikaIqhym622uD6iCFMlgRmS8zqXWy9QAcQVJHZuC5jo0AGUdXB6Cx1PlWHcJjbuOphqNuhBdncRi1JLy+DbaCRivYHWbLAW44wADJQJOjY0iM1mqMxmt6HqFUVDCB5sv2Futquxliu93h1utjRC-ujRDqSOFOCo9IZMVhRgRKIxOKoRUtA1QPicFqY+3D6fyaI5Od5j1bnfRen+MAANXCkWiiHpV+nAGAQQHoAMKsHQ2ayjUYDqCSAQEOBf6OoBKEAQETjMBAnAShYJYqDBcGBEhqEka2AQBu4kLBIRhosOyAhhiagGzvOpCLiBvgEB49BEAAHr2Ey+A86R3HQUFlLcfTULsBLphUpwFrs5b-maBCcdxfH3k2ASibQUGvgEka3C4nSjGJVF4M4WACgAopyyHqAxU4zuozJ8F2brUAJkgLAeDbWKZpADpeDk0nwE7UM2DltuoADyox5ouABiaI0qQ5C7OQvEtBu6TTKgpB4SFgHcAAzOwWWkPFQXaYQaCFSGYAcoxKnmnFCULr6h7vEcBgAI5nGecC7E+35+Mep7nn8xUAQeRBVR1pAepiuqHuyzlmsom0iPZGg8nybplLKSR5EQVipN4+7dU+VzFKNu7FBNWFTTYylYcd-ogpkfQVA1EDsBmpDjLmowCOoIDORoIHUnm5x+LlMBSbolUzRoTjVOmxTuboBjZIVSTqHAvH6OYlhdOUlQ2pjEksMN6j0B0DzDhoIOkHC+V-VmOaLXCK3dRkP05HhUJmgjSNOETLRfbjQtJOwEMOagcjkMt00AH6voDcL3dEW3qAAvvZMVYAofSMKaDy9oj+TeJLAn6HwhUQDYcjdFM9VFW9Zqs+zHtdNLFAFowEvZfL-5i-kIdLXrhuQ4GFCyjI416N1RAfJb-WDRlxzbmN3TypN4rTV7bU7J0ogdETBAKX4unibQHyZ+YGXDj7fPzZqBiQYwq3zWHDk8cTh7sHIGAR1A7Dj1H7DNa1gHSICJKYrCjGkd7Zn8rBcl5nCdeQqva-EF5hGqAA7AArOS5KaAAQq+qBqVvACMACcMf2fr4ZQ7j5BLrwvTKjejwPgrBLSoHYOqcYgwTrKDAPrAAukAA)
+
+<br>Share a Shiny app from a GitHub Gist: <https://shinylive.io/py/app/#gist=e62218aa28bf26e785fc6cb99efe8efe>
+
+<small>[🔗 App source code](https://gist.github.com/wch/e62218aa28bf26e785fc6cb99efe8efe)</small>
+
+
+## Convert a Shiny app
+
+Install the [Shinylive R package](https://github.com/posit-dev/r-shinylive):
+
+```{.r style="font-size: 200%"}
+install.packages("pak")
+pak:pak("posit-dev/r-shinylive")
+```
+
+. . .
+
+<br>
+Convert the app:
+```{.r style="font-size: 200%"}
+shinylive::export("myapp", "site")
+```
+
+. . .
+
+<br>
+Preview the application:
+```{.r style="font-size: 200%"}
+httpuv::runStaticServer("site")
+```
+
+<br>
+Ready to be uploaded to GitHub Pages or other static web hosting
+
+## Shinylive Quarto extension
+
+First, in a terminal run the command:
+
+```{.bash style="font-size: 200%; margin-top:1em;"}
+quarto add quarto-ext/shinylive
+```
+
+---
+
+### Insert your Shiny app directly into a Quarto document
+
+````{.md code-line-numbers="5-19"}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+
+```{shinylive-r}
+#| standalone: true
+library(shiny)
+
+# Create Shiny UI
+ui <- [...]
+
+# Create Shiny server function
+server <- function(input, output, session) {
+  [...]
+}
+
+# Build Shiny app
+shinyApp(ui = ui, server = server)
+```
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+culpa qui officia deserunt mollit laborum.
+````
+
+---
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 700
+
+library(shiny)
+library(bslib)
+
+theme <- bs_theme(font_scale = 1.5)
+
+# Define UI for app that draws a histogram ----
+ui <- page_sidebar(theme = theme,
+  sidebar = sidebar(open = "open",
+    numericInput("n", "Sample count", 50),
+    checkboxInput("pause", "Pause", FALSE),
+  ),
+  plotOutput("plot", width=1100)
+)
+
+server <- function(input, output, session) {
+  data <- reactive({
+    input$resample
+    if (!isTRUE(input$pause)) {
+      invalidateLater(1000)
+    }
+    rnorm(input$n)
+  })
+  
+  output$plot <- renderPlot({
+    hist(data(),
+      breaks = 30,
+      xlim = c(-2, 2),
+      ylim = c(0, 1),
+      xlab = "value",
+      freq = FALSE,
+      main = ""
+    )
+    
+    x <- seq(from = -2, to = 2, length.out = 500)
+    y <- dnorm(x)
+    lines(x, y, lwd=1.5)
+    
+    lwd <- 5
+    abline(v=0, col="red", lwd=lwd, lty=2)
+    abline(v=mean(data()), col="blue", lwd=lwd, lty=1)
+
+    legend(legend = c("Normal", "Mean", "Sample mean"),
+      col = c("black", "red", "blue"),
+      lty = c(1, 2, 1),
+      lwd = c(1, lwd, lwd),
+      x = 1,
+      y = 0.9
+    )
+  }, res=140)
+}
+
+# Create Shiny app ----
+shinyApp(ui = ui, server = server)
+```
+
+## Future work and current issues
+
+* Shinylive is [experimental!]{.em} Things are still very much in flux
+
+. . .
+
+* Not all R packages work in Wasm
+
+* Browser security restrictions: very limited networking, no raw socket access
+
+* Moving data into and out of the virtual Wasm environment is clunky at the moment
+
+. . .
+
+* [There are no secrets in a Shinylive app!]{.em}
+
+## Links
+
+### 🔗 webR demo website {style="padding-top: 1em;"}
+
+<https://webr.r-wasm.org/v0.2.2/>
+
+### 🌎 Shinylive for R examples {style="padding-top: 1em;"}
+
+<https://shinylive.io/r/>
+
+### 📦 NPM (for JS Developers) {style="padding-top: 1em;"}
+
+`npm install webr`
+
+### 📙 Docs {style="padding-top: 1em;"}
+
+<https://docs.r-wasm.org/webr/v0.2.2/>
+
+<https://github.com/quarto-ext/shinylive>
+
+
