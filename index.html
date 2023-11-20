@@ -467,10 +467,10 @@ George Stagg<br>Senior Software Engineer, Posit PBC
 <section id="solution-evaluate-r-code-locally-inside-a-web-browser" class="slide level2">
 <h2>Solution: Evaluate R code locally inside a web browser!</h2>
 <div style="text-align: center; margin-top: 2em;">
-<p><img data-src="images/intro5.png" style="width:25%"></p>
+<p><img data-src="images/client-side.png" style="width:45%"></p>
 </div>
 <div style="font-size:150%; font-weight: bold; text-align: center;">
-<p>WebR allows you to move computation of R code from server-side hardware to client devices</p>
+<p>WebR allows you to move computation of R code from server-side hardware to client devices, without installing R!</p>
 </div>
 </section>
 <section id="examples-of-some-r-servers" class="slide level2">
@@ -535,6 +535,52 @@ George Stagg<br>Senior Software Engineer, Posit PBC
 </div>
 </div>
 </section>
+<section id="difficulties-of-wasm" class="slide level2">
+<h2>Difficulties of Wasm</h2>
+<p>Observation: Many programming language interpreters are written in C or C++ for Unix/Linux…</p>
+<div class="fragment">
+<p>BUT: For something like Python or R it’s harder than it first seems</p>
+<ul>
+<li><p>Standard &amp; support libraries (e.g.&nbsp;linear algebra)</p></li>
+<li><p>Legacy Fortran code</p></li>
+<li><p>Graphics &amp; font support</p></li>
+<li><p>Network sockets</p></li>
+<li><p>Local file I/O</p></li>
+<li><p>Threading and forking</p></li>
+<li><p>Limited methods to wait for input</p></li>
+</ul>
+</div>
+<div class="fragment">
+<p>Wasm/Emscripten <span class="em">looks</span> like Unix, but browser security limitations are always there.</p>
+<p>We have to work around them, replacing standard OS tools with the provided browser APIs.</p>
+</div>
+</section>
+<section id="pyodide" class="slide level2">
+<h2>Pyodide</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/pyodide.png" alt="The pyodide logo" height="350"></p>
+</figure>
+</div>
+<div style="text-align: center">
+<p><a href="https://pyodide.org/en/stable/">Pyodide</a> is a port of CPython to WebAssembly</p>
+<p><br>Pyodide makes it possible to <span class="em">install and run Python packages in the browser</span></p>
+<p>Supported scientific packages include numpy, pandas, scipy, matplotlib, and scikit-learn.</p>
+</div>
+</section>
+<section id="webr" class="slide level2">
+<h2>WebR</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/webr.png" alt="The webR logo" height="350"></p>
+</figure>
+</div>
+<div style="text-align: center">
+<p><a href="https://docs.r-wasm.org/">WebR</a> is a version of the R interpreter built for WebAssembly</p>
+<p>Execute R code directly in a web browser, <span class="em">without a supporting R server</span></p>
+<p><br>Alternatively, run an R process <span class="em">server-side</span> using Node.js</p>
+</div>
+</section>
 <section id="webr-demo-application-httpswebr.r-wasm.orgv0.2.2" class="slide level2">
 <h2>WebR Demo Application <span style="font-size: 50%">🔗 <a href="https://webr.r-wasm.org/v0.2.2/" class="uri">https://webr.r-wasm.org/v0.2.2/</a></span></h2>
 <iframe class="web zoomed" allow="cross-origin-isolated" width="80%" height="70%" src="https://webr.r-wasm.org/v0.2.1/">
@@ -550,6 +596,66 @@ George Stagg<br>Senior Software Engineer, Posit PBC
 <li><p>Screen reader support in R console</p></li>
 <li><p>Works on wide-ranging devices: mobile, tablet, chromebook</p></li>
 </ul>
+</section>
+<section id="modern-text-rendering-features-and-internationalisation" class="slide level2">
+<h2>Modern text rendering features and internationalisation</h2>
+<script>
+  insertAceWebR(
+  document.currentScript,
+    `plot(rnorm(1000), rnorm(1000), col=rgb(0,0,0,0.5),
+     xlim=c(-5, 5), ylim=c(-5, 5), main="This is the title 🚀",
+     xlab="This is the x label", ylab="This is the y label",
+     family="Futura")
+text(-4, 4, "This is English", family="serif")
+text(-4, -4, "هذا مكتوب باللغة العربية")
+text(4, 4, "これは日本語です")
+text(4, -4, "זה כתוב בעברית")`,
+    { height: 235, canvas: { width: 1008, height: 600 } }
+  );
+</script>
+</section>
+<section id="modern-text-rendering-features-and-internationalisation-1" class="slide level2">
+<h2>Modern text rendering features and internationalisation</h2>
+<ul>
+<li><p>Any font family available to the web browser can be used in plots</p></li>
+<li><p>Accurate font metrics for text sizing and positioning</p></li>
+<li><p>Advanced text features such as ligatures &amp; colour emoji 😃</p></li>
+<li><p>RTL text and automatic font fallback for international scripts</p></li>
+</ul>
+</section>
+<section id="the-webr-quarto-extension" class="slide level2">
+<h2>The webR Quarto extension</h2>
+<ul>
+<li>Knowledge of web development is not required to use webR in your own content</li>
+</ul>
+<div style="text-align: center">
+<p><img data-src="images/webr.gif" style="width: 80%; border: 1px solid #889; box-shadow: 2px 2px 15px #889;"></p>
+</div>
+<div style="text-align: right">
+<p><small><a href="https://github.com/coatless/quarto-webr">coatless/quarto-webr</a> — James Balamuta</small></p>
+</div>
+</section>
+<section id="the-webr-quarto-extension-1" class="slide level2">
+<h2>The webR Quarto extension</h2>
+<p>In a terminal,</p>
+<div class="sourceCode" id="cb1" style="font-size: 200%; margin-top:0em;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">quarto</span> add coatless/quarto-webr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br>In a Quarto doc,</p>
+<div class="sourceCode" id="cb2" style="font-size: 150%; margin-top:0em;"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1"></a><span class="in">```{webr-r}</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="in">fit = lm(mpg ~ am, data = mtcars)</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="in">summary(fit)</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="live-and-interactive-r-code" class="slide level2">
+<h2>Live and interactive R code</h2>
+<script>
+  insertAceWebR(
+  document.currentScript,
+    `penguins |>
+  group_by(species, island) |>
+  summarise(avg_mass = mean(body_mass_g, na.rm = TRUE))`,
+    { height: 100, canvas: { width: 1000, height: 500 } }
+  );
+</script>
 </section>
 <section id="live-and-interactive-data-visualisation" class="slide level2">
 <h2>Live and interactive data visualisation</h2>
@@ -621,108 +727,108 @@ George Stagg<br>Senior Software Engineer, Posit PBC
 <section id="convert-a-shiny-app" class="slide level2">
 <h2>Convert a Shiny app</h2>
 <p>Install the <a href="https://github.com/posit-dev/r-shinylive">Shinylive R package</a>:</p>
-<div class="sourceCode" id="cb1" style="font-size: 200%"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="st">"pak"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>pak<span class="sc">:</span><span class="fu">pak</span>(<span class="st">"posit-dev/r-shinylive"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3" style="font-size: 200%"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">install.packages</span>(<span class="st">"pak"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>pak<span class="sc">:</span><span class="fu">pak</span>(<span class="st">"posit-dev/r-shinylive"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="fragment">
 <p><br> Convert the app:</p>
-<div class="sourceCode" id="cb2" style="font-size: 200%"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>shinylive<span class="sc">::</span><span class="fu">export</span>(<span class="st">"myapp"</span>, <span class="st">"site"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4" style="font-size: 200%"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>shinylive<span class="sc">::</span><span class="fu">export</span>(<span class="st">"myapp"</span>, <span class="st">"site"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <p><br> Preview the application:</p>
-<div class="sourceCode" id="cb3" style="font-size: 200%"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>httpuv<span class="sc">::</span><span class="fu">runStaticServer</span>(<span class="st">"site"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5" style="font-size: 200%"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>httpuv<span class="sc">::</span><span class="fu">runStaticServer</span>(<span class="st">"site"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br> Ready to be uploaded to GitHub Pages or other static web hosting</p>
 </div>
 </section>
 <section id="shinylive-quarto-extension" class="slide level2">
 <h2>Shinylive Quarto extension</h2>
 <p>First, in a terminal run the command:</p>
-<div class="sourceCode" id="cb4" style="font-size: 200%; margin-top:1em;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">quarto</span> add quarto-ext/shinylive</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6" style="font-size: 200%; margin-top:1em;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">quarto</span> add quarto-ext/shinylive</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <h3 id="insert-your-shiny-app-directly-into-a-quarto-document">Insert your Shiny app directly into a Quarto document</h3>
-<div class="sourceCode" id="cb5" data-code-line-numbers="5-19"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</span>
-<span id="cb5-2"><a href="#cb5-2"></a>incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis</span>
-<span id="cb5-3"><a href="#cb5-3"></a>nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="in">```{shinylive-r}</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#| standalone: true</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="ex">library</span><span class="er">(</span><span class="ex">shiny</span><span class="kw">)</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co"># Create Shiny UI</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="ex">ui</span> <span class="op">&lt;</span>- <span class="pp">[</span><span class="ss">...</span><span class="pp">]</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co"># Create Shiny server function</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="ex">server</span> <span class="op">&lt;</span>- function<span class="er">(</span><span class="ex">input,</span> output, session<span class="kw">)</span> <span class="kw">{</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a>  <span class="ex">[...]</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="kw">}</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="co"># Build Shiny app</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="ex">shinyApp</span><span class="er">(</span><span class="ex">ui</span> = ui, server = server<span class="kw">)</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="in">```</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a></span>
-<span id="cb5-21"><a href="#cb5-21"></a>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</span>
-<span id="cb5-22"><a href="#cb5-22"></a>fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in</span>
-<span id="cb5-23"><a href="#cb5-23"></a>culpa qui officia deserunt mollit laborum.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7" data-code-line-numbers="5-19"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</span>
+<span id="cb7-2"><a href="#cb7-2"></a>incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis</span>
+<span id="cb7-3"><a href="#cb7-3"></a>nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="in">```{shinylive-r}</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#| standalone: true</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="ex">library</span><span class="er">(</span><span class="ex">shiny</span><span class="kw">)</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co"># Create Shiny UI</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="ex">ui</span> <span class="op">&lt;</span>- <span class="pp">[</span><span class="ss">...</span><span class="pp">]</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co"># Create Shiny server function</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="ex">server</span> <span class="op">&lt;</span>- function<span class="er">(</span><span class="ex">input,</span> output, session<span class="kw">)</span> <span class="kw">{</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>  <span class="ex">[...]</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="kw">}</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co"># Build Shiny app</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="ex">shinyApp</span><span class="er">(</span><span class="ex">ui</span> = ui, server = server<span class="kw">)</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="in">```</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a></span>
+<span id="cb7-21"><a href="#cb7-21"></a>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</span>
+<span id="cb7-22"><a href="#cb7-22"></a>fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in</span>
+<span id="cb7-23"><a href="#cb7-23"></a>culpa qui officia deserunt mollit laborum.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb6" data-engine="r"><pre class="sourceCode numberSource shinylive-r number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href="#cb6-1"></a>#| standalone: true</span>
-<span id="cb6-2"><a href="#cb6-2"></a>#| viewerHeight: 700</span>
-<span id="cb6-3"><a href="#cb6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4"></a>library(shiny)</span>
-<span id="cb6-5"><a href="#cb6-5"></a>library(bslib)</span>
-<span id="cb6-6"><a href="#cb6-6"></a></span>
-<span id="cb6-7"><a href="#cb6-7"></a>theme &lt;- bs_theme(font_scale = 1.5)</span>
-<span id="cb6-8"><a href="#cb6-8"></a></span>
-<span id="cb6-9"><a href="#cb6-9"></a># Define UI for app that draws a histogram ----</span>
-<span id="cb6-10"><a href="#cb6-10"></a>ui &lt;- page_sidebar(theme = theme,</span>
-<span id="cb6-11"><a href="#cb6-11"></a>  sidebar = sidebar(open = "open",</span>
-<span id="cb6-12"><a href="#cb6-12"></a>    numericInput("n", "Sample count", 50),</span>
-<span id="cb6-13"><a href="#cb6-13"></a>    checkboxInput("pause", "Pause", FALSE),</span>
-<span id="cb6-14"><a href="#cb6-14"></a>  ),</span>
-<span id="cb6-15"><a href="#cb6-15"></a>  plotOutput("plot", width=1100)</span>
-<span id="cb6-16"><a href="#cb6-16"></a>)</span>
-<span id="cb6-17"><a href="#cb6-17"></a></span>
-<span id="cb6-18"><a href="#cb6-18"></a>server &lt;- function(input, output, session) {</span>
-<span id="cb6-19"><a href="#cb6-19"></a>  data &lt;- reactive({</span>
-<span id="cb6-20"><a href="#cb6-20"></a>    input$resample</span>
-<span id="cb6-21"><a href="#cb6-21"></a>    if (!isTRUE(input$pause)) {</span>
-<span id="cb6-22"><a href="#cb6-22"></a>      invalidateLater(1000)</span>
-<span id="cb6-23"><a href="#cb6-23"></a>    }</span>
-<span id="cb6-24"><a href="#cb6-24"></a>    rnorm(input$n)</span>
-<span id="cb6-25"><a href="#cb6-25"></a>  })</span>
-<span id="cb6-26"><a href="#cb6-26"></a>  </span>
-<span id="cb6-27"><a href="#cb6-27"></a>  output$plot &lt;- renderPlot({</span>
-<span id="cb6-28"><a href="#cb6-28"></a>    hist(data(),</span>
-<span id="cb6-29"><a href="#cb6-29"></a>      breaks = 30,</span>
-<span id="cb6-30"><a href="#cb6-30"></a>      xlim = c(-2, 2),</span>
-<span id="cb6-31"><a href="#cb6-31"></a>      ylim = c(0, 1),</span>
-<span id="cb6-32"><a href="#cb6-32"></a>      xlab = "value",</span>
-<span id="cb6-33"><a href="#cb6-33"></a>      freq = FALSE,</span>
-<span id="cb6-34"><a href="#cb6-34"></a>      main = ""</span>
-<span id="cb6-35"><a href="#cb6-35"></a>    )</span>
-<span id="cb6-36"><a href="#cb6-36"></a>    </span>
-<span id="cb6-37"><a href="#cb6-37"></a>    x &lt;- seq(from = -2, to = 2, length.out = 500)</span>
-<span id="cb6-38"><a href="#cb6-38"></a>    y &lt;- dnorm(x)</span>
-<span id="cb6-39"><a href="#cb6-39"></a>    lines(x, y, lwd=1.5)</span>
-<span id="cb6-40"><a href="#cb6-40"></a>    </span>
-<span id="cb6-41"><a href="#cb6-41"></a>    lwd &lt;- 5</span>
-<span id="cb6-42"><a href="#cb6-42"></a>    abline(v=0, col="red", lwd=lwd, lty=2)</span>
-<span id="cb6-43"><a href="#cb6-43"></a>    abline(v=mean(data()), col="blue", lwd=lwd, lty=1)</span>
-<span id="cb6-44"><a href="#cb6-44"></a></span>
-<span id="cb6-45"><a href="#cb6-45"></a>    legend(legend = c("Normal", "Mean", "Sample mean"),</span>
-<span id="cb6-46"><a href="#cb6-46"></a>      col = c("black", "red", "blue"),</span>
-<span id="cb6-47"><a href="#cb6-47"></a>      lty = c(1, 2, 1),</span>
-<span id="cb6-48"><a href="#cb6-48"></a>      lwd = c(1, lwd, lwd),</span>
-<span id="cb6-49"><a href="#cb6-49"></a>      x = 1,</span>
-<span id="cb6-50"><a href="#cb6-50"></a>      y = 0.9</span>
-<span id="cb6-51"><a href="#cb6-51"></a>    )</span>
-<span id="cb6-52"><a href="#cb6-52"></a>  }, res=140)</span>
-<span id="cb6-53"><a href="#cb6-53"></a>}</span>
-<span id="cb6-54"><a href="#cb6-54"></a></span>
-<span id="cb6-55"><a href="#cb6-55"></a># Create Shiny app ----</span>
-<span id="cb6-56"><a href="#cb6-56"></a>shinyApp(ui = ui, server = server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8" data-engine="r"><pre class="sourceCode numberSource shinylive-r number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href="#cb8-1"></a>#| standalone: true</span>
+<span id="cb8-2"><a href="#cb8-2"></a>#| viewerHeight: 700</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a>library(shiny)</span>
+<span id="cb8-5"><a href="#cb8-5"></a>library(bslib)</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a>theme &lt;- bs_theme(font_scale = 1.5)</span>
+<span id="cb8-8"><a href="#cb8-8"></a></span>
+<span id="cb8-9"><a href="#cb8-9"></a># Define UI for app that draws a histogram ----</span>
+<span id="cb8-10"><a href="#cb8-10"></a>ui &lt;- page_sidebar(theme = theme,</span>
+<span id="cb8-11"><a href="#cb8-11"></a>  sidebar = sidebar(open = "open",</span>
+<span id="cb8-12"><a href="#cb8-12"></a>    numericInput("n", "Sample count", 50),</span>
+<span id="cb8-13"><a href="#cb8-13"></a>    checkboxInput("pause", "Pause", FALSE),</span>
+<span id="cb8-14"><a href="#cb8-14"></a>  ),</span>
+<span id="cb8-15"><a href="#cb8-15"></a>  plotOutput("plot", width=1100)</span>
+<span id="cb8-16"><a href="#cb8-16"></a>)</span>
+<span id="cb8-17"><a href="#cb8-17"></a></span>
+<span id="cb8-18"><a href="#cb8-18"></a>server &lt;- function(input, output, session) {</span>
+<span id="cb8-19"><a href="#cb8-19"></a>  data &lt;- reactive({</span>
+<span id="cb8-20"><a href="#cb8-20"></a>    input$resample</span>
+<span id="cb8-21"><a href="#cb8-21"></a>    if (!isTRUE(input$pause)) {</span>
+<span id="cb8-22"><a href="#cb8-22"></a>      invalidateLater(1000)</span>
+<span id="cb8-23"><a href="#cb8-23"></a>    }</span>
+<span id="cb8-24"><a href="#cb8-24"></a>    rnorm(input$n)</span>
+<span id="cb8-25"><a href="#cb8-25"></a>  })</span>
+<span id="cb8-26"><a href="#cb8-26"></a>  </span>
+<span id="cb8-27"><a href="#cb8-27"></a>  output$plot &lt;- renderPlot({</span>
+<span id="cb8-28"><a href="#cb8-28"></a>    hist(data(),</span>
+<span id="cb8-29"><a href="#cb8-29"></a>      breaks = 30,</span>
+<span id="cb8-30"><a href="#cb8-30"></a>      xlim = c(-2, 2),</span>
+<span id="cb8-31"><a href="#cb8-31"></a>      ylim = c(0, 1),</span>
+<span id="cb8-32"><a href="#cb8-32"></a>      xlab = "value",</span>
+<span id="cb8-33"><a href="#cb8-33"></a>      freq = FALSE,</span>
+<span id="cb8-34"><a href="#cb8-34"></a>      main = ""</span>
+<span id="cb8-35"><a href="#cb8-35"></a>    )</span>
+<span id="cb8-36"><a href="#cb8-36"></a>    </span>
+<span id="cb8-37"><a href="#cb8-37"></a>    x &lt;- seq(from = -2, to = 2, length.out = 500)</span>
+<span id="cb8-38"><a href="#cb8-38"></a>    y &lt;- dnorm(x)</span>
+<span id="cb8-39"><a href="#cb8-39"></a>    lines(x, y, lwd=1.5)</span>
+<span id="cb8-40"><a href="#cb8-40"></a>    </span>
+<span id="cb8-41"><a href="#cb8-41"></a>    lwd &lt;- 5</span>
+<span id="cb8-42"><a href="#cb8-42"></a>    abline(v=0, col="red", lwd=lwd, lty=2)</span>
+<span id="cb8-43"><a href="#cb8-43"></a>    abline(v=mean(data()), col="blue", lwd=lwd, lty=1)</span>
+<span id="cb8-44"><a href="#cb8-44"></a></span>
+<span id="cb8-45"><a href="#cb8-45"></a>    legend(legend = c("Normal", "Mean", "Sample mean"),</span>
+<span id="cb8-46"><a href="#cb8-46"></a>      col = c("black", "red", "blue"),</span>
+<span id="cb8-47"><a href="#cb8-47"></a>      lty = c(1, 2, 1),</span>
+<span id="cb8-48"><a href="#cb8-48"></a>      lwd = c(1, lwd, lwd),</span>
+<span id="cb8-49"><a href="#cb8-49"></a>      x = 1,</span>
+<span id="cb8-50"><a href="#cb8-50"></a>      y = 0.9</span>
+<span id="cb8-51"><a href="#cb8-51"></a>    )</span>
+<span id="cb8-52"><a href="#cb8-52"></a>  }, res=140)</span>
+<span id="cb8-53"><a href="#cb8-53"></a>}</span>
+<span id="cb8-54"><a href="#cb8-54"></a></span>
+<span id="cb8-55"><a href="#cb8-55"></a># Create Shiny app ----</span>
+<span id="cb8-56"><a href="#cb8-56"></a>shinyApp(ui = ui, server = server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="future-work-and-current-issues" class="slide level2">
 <h2>Future work and current issues</h2>

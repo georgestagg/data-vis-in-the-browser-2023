@@ -25,7 +25,7 @@
     "href": "index.html#solution-evaluate-r-code-locally-inside-a-web-browser",
     "title": "Data Visualisation in the browser:WebAssembly & webR",
     "section": "Solution: Evaluate R code locally inside a web browser!",
-    "text": "Solution: Evaluate R code locally inside a web browser!\n\n\n\n\nWebR allows you to move computation of R code from server-side hardware to client devices"
+    "text": "Solution: Evaluate R code locally inside a web browser!\n\n\n\n\nWebR allows you to move computation of R code from server-side hardware to client devices, without installing R!"
   },
   {
     "objectID": "index.html#examples-of-some-r-servers",
@@ -56,6 +56,27 @@
     "text": "Emscripten (2012)\n\n\n\n\n\nC/C++ compiler for WebAssembly\nBased on LLVM/Clang\nOriginally designed for ASM.js in web browsers\nDOSBox, SQLite, Pyodide, …"
   },
   {
+    "objectID": "index.html#difficulties-of-wasm",
+    "href": "index.html#difficulties-of-wasm",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Difficulties of Wasm",
+    "text": "Difficulties of Wasm\nObservation: Many programming language interpreters are written in C or C++ for Unix/Linux…\n\nBUT: For something like Python or R it’s harder than it first seems\n\nStandard & support libraries (e.g. linear algebra)\nLegacy Fortran code\nGraphics & font support\nNetwork sockets\nLocal file I/O\nThreading and forking\nLimited methods to wait for input\n\n\n\nWasm/Emscripten looks like Unix, but browser security limitations are always there.\nWe have to work around them, replacing standard OS tools with the provided browser APIs."
+  },
+  {
+    "objectID": "index.html#pyodide",
+    "href": "index.html#pyodide",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Pyodide",
+    "text": "Pyodide\n\n\n\n\n\n\nPyodide is a port of CPython to WebAssembly\nPyodide makes it possible to install and run Python packages in the browser\nSupported scientific packages include numpy, pandas, scipy, matplotlib, and scikit-learn."
+  },
+  {
+    "objectID": "index.html#webr",
+    "href": "index.html#webr",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "WebR",
+    "text": "WebR\n\n\n\n\n\n\nWebR is a version of the R interpreter built for WebAssembly\nExecute R code directly in a web browser, without a supporting R server\nAlternatively, run an R process server-side using Node.js"
+  },
+  {
     "objectID": "index.html#webr-demo-application-httpswebr.r-wasm.orgv0.2.2",
     "href": "index.html#webr-demo-application-httpswebr.r-wasm.orgv0.2.2",
     "title": "Data Visualisation in the browser:WebAssembly & webR",
@@ -68,6 +89,41 @@
     "title": "Data Visualisation in the browser:WebAssembly & webR",
     "section": "Features",
     "text": "Features\n\nR code editor, multi document support, syntax highlighting\nContext aware autocompletion\nFolder and file management tools\nMultiple plots, manage and clear plot history\nScreen reader support in R console\nWorks on wide-ranging devices: mobile, tablet, chromebook"
+  },
+  {
+    "objectID": "index.html#modern-text-rendering-features-and-internationalisation",
+    "href": "index.html#modern-text-rendering-features-and-internationalisation",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Modern text rendering features and internationalisation",
+    "text": "Modern text rendering features and internationalisation"
+  },
+  {
+    "objectID": "index.html#modern-text-rendering-features-and-internationalisation-1",
+    "href": "index.html#modern-text-rendering-features-and-internationalisation-1",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Modern text rendering features and internationalisation",
+    "text": "Modern text rendering features and internationalisation\n\nAny font family available to the web browser can be used in plots\nAccurate font metrics for text sizing and positioning\nAdvanced text features such as ligatures & colour emoji 😃\nRTL text and automatic font fallback for international scripts"
+  },
+  {
+    "objectID": "index.html#the-webr-quarto-extension",
+    "href": "index.html#the-webr-quarto-extension",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "The webR Quarto extension",
+    "text": "The webR Quarto extension\n\nKnowledge of web development is not required to use webR in your own content\n\n\n\n\n\ncoatless/quarto-webr — James Balamuta"
+  },
+  {
+    "objectID": "index.html#the-webr-quarto-extension-1",
+    "href": "index.html#the-webr-quarto-extension-1",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "The webR Quarto extension",
+    "text": "The webR Quarto extension\nIn a terminal,\nquarto add coatless/quarto-webr\nIn a Quarto doc,\n```{webr-r}\nfit = lm(mpg ~ am, data = mtcars)\nsummary(fit)\n```"
+  },
+  {
+    "objectID": "index.html#live-and-interactive-r-code",
+    "href": "index.html#live-and-interactive-r-code",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Live and interactive R code",
+    "text": "Live and interactive R code"
   },
   {
     "objectID": "index.html#live-and-interactive-data-visualisation",
