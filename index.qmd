@@ -82,11 +82,11 @@ Let me tell a story about my original reasons for creating webR...
 ## Solution: Evaluate R code locally inside a web browser!
 
 ::: {style="text-align: center; margin-top: 2em;"}
-![](images/intro5.png){style="width:25%"}
+![](images/client-side.png){style="width:45%"}
 :::
 
 ::: {style="font-size:150%; font-weight: bold; text-align: center;"}
-WebR allows you to move computation of R code from server-side hardware to client devices
+WebR allows you to move computation of R code from server-side hardware to client devices, without installing R!
 :::
 
 ## Examples of some R servers
@@ -151,6 +151,60 @@ This is [static]{.em} hosting. No way to run dynamic R code on the server.
 :::
 :::
 
+## Difficulties of Wasm
+
+Observation: Many programming language interpreters are written in C or C++ for Unix/Linux...
+
+. . .
+
+BUT: For something like Python or R it's harder than it first seems
+
+* Standard & support libraries (e.g. linear algebra)
+
+* Legacy Fortran code
+
+* Graphics & font support
+
+* Network sockets
+
+* Local file I/O
+
+* Threading and forking
+
+* Limited methods to wait for input
+
+. . .
+
+Wasm/Emscripten [looks]{.em} like Unix, but browser security limitations are always there.
+
+We have to work around them, replacing standard OS tools with the provided browser APIs. 
+
+
+## Pyodide
+
+![](images/pyodide.png){alt="The pyodide logo" height="350" fig-align="center"}
+
+::: {style="text-align: center"}
+[Pyodide](https://pyodide.org/en/stable/) is a port of CPython to WebAssembly
+
+<br>Pyodide makes it possible to [install and run Python packages in the browser]{.em}
+
+Supported scientific packages include numpy, pandas, scipy, matplotlib, and scikit-learn.
+:::
+
+
+## WebR
+
+![](images/webr.png){alt="The webR logo" height="350" fig-align="center"}
+
+::: {style="text-align: center"}
+[WebR](https://docs.r-wasm.org/) is a version of the R interpreter built for WebAssembly
+
+Execute R code directly in a web browser, [without a supporting R server]{.em}
+
+<br>Alternatively, run an R process [server-side]{.em} using Node.js
+:::
+
 
 ## WebR Demo Application <span style="font-size: 50%">🔗 <https://webr.r-wasm.org/v0.2.2/></span>
 
@@ -171,6 +225,77 @@ This is [static]{.em} hosting. No way to run dynamic R code on the server.
 -   Screen reader support in R console
 
 -   Works on wide-ranging devices: mobile, tablet, chromebook
+
+## Modern text rendering features and internationalisation
+```{=html}
+<script>
+  insertAceWebR(
+  document.currentScript,
+    `plot(rnorm(1000), rnorm(1000), col=rgb(0,0,0,0.5),
+     xlim=c(-5, 5), ylim=c(-5, 5), main="This is the title 🚀",
+     xlab="This is the x label", ylab="This is the y label",
+     family="Futura")
+text(-4, 4, "This is English", family="serif")
+text(-4, -4, "هذا مكتوب باللغة العربية")
+text(4, 4, "これは日本語です")
+text(4, -4, "זה כתוב בעברית")`,
+    { height: 235, canvas: { width: 1008, height: 600 } }
+  );
+</script>
+```
+
+## Modern text rendering features and internationalisation
+
+-   Any font family available to the web browser can be used in plots
+
+-   Accurate font metrics for text sizing and positioning
+
+-   Advanced text features such as ligatures & colour emoji 😃
+
+-   RTL text and automatic font fallback for international scripts
+
+## The webR Quarto extension
+
+-   Knowledge of web development is not required to use webR in your own content
+
+::: {style="text-align: center"}
+![](images/webr.gif){style="width: 80%; border: 1px solid #889; box-shadow: 2px 2px 15px #889;"}
+:::
+
+::: {style="text-align: right"}
+<small>[coatless/quarto-webr](https://github.com/coatless/quarto-webr) --- James Balamuta</small>
+:::
+
+## The webR Quarto extension
+
+In a terminal,
+
+```{.bash style="font-size: 200%; margin-top:0em;"}
+quarto add coatless/quarto-webr
+```
+
+<br>In a Quarto doc,
+
+````{.md style="font-size: 150%; margin-top:0em;"}
+```{webr-r}
+fit = lm(mpg ~ am, data = mtcars)
+summary(fit)
+```
+````
+
+## Live and interactive R code
+
+```{=html}
+<script>
+  insertAceWebR(
+  document.currentScript,
+    `penguins |>
+  group_by(species, island) |>
+  summarise(avg_mass = mean(body_mass_g, na.rm = TRUE))`,
+    { height: 100, canvas: { width: 1000, height: 500 } }
+  );
+</script>
+```
 
 ## Live and interactive data visualisation
 
