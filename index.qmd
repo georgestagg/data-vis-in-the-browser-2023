@@ -254,6 +254,16 @@ text(4, -4, "זה כתוב בעברית")`,
 
 -   RTL text and automatic font fallback for international scripts
 
+
+## Notebooks with Jupyterlite
+
+* 🔗 <https://jupyter.r-wasm.org/lab/index.html>
+
+::: {style="text-align: center"}
+![](images/jupyter.png){style="width: 80%"}
+:::
+
+
 ## The webR Quarto extension
 
 -   Knowledge of web development is not required to use webR in your own content
@@ -278,8 +288,9 @@ quarto add coatless/quarto-webr
 
 ````{.md style="font-size: 150%; margin-top:0em;"}
 ```{webr-r}
-fit = lm(mpg ~ am, data = mtcars)
-summary(fit)
+penguins |>
+  group_by(species, island) |>
+  summarise(avg_mass = mean(body_mass_g, na.rm = TRUE))
 ```
 ````
 
@@ -313,14 +324,6 @@ summary(fit)
   );
 </script>
 ```
-
-## Notebooks with Jupyterlite
-
-* 🔗 <https://jupyter.r-wasm.org/lab/index.html>
-
-::: {style="text-align: center"}
-![](images/jupyter.png){style="width: 80%"}
-:::
 
 ## R packages
 
