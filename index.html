@@ -467,7 +467,7 @@ George Stagg<br>Senior Software Engineer, Posit PBC
 <section id="solution-evaluate-r-code-locally-inside-a-web-browser" class="slide level2">
 <h2>Solution: Evaluate R code locally inside a web browser!</h2>
 <div style="text-align: center; margin-top: 2em;">
-<p><img data-src="images/client-side.png" style="width:40%"></p>
+<p><img data-src="images/client-side.png" style="width:45%"></p>
 </div>
 <div style="font-size:150%; font-weight: bold; text-align: center;">
 <p>WebR allows you to move computation of R code from server-side hardware to client devices, without installing R!</p>
@@ -503,6 +503,19 @@ George Stagg<br>Senior Software Engineer, Posit PBC
 </ul>
 <div class="fragment">
 <p>This is <span class="em">static</span> hosting. No way to run dynamic R code on the server.</p>
+</div>
+</section>
+<section id="webr" class="slide level2">
+<h2>WebR</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/webr.png" alt="The webR logo" height="350"></p>
+</figure>
+</div>
+<div style="text-align: center">
+<p><a href="https://docs.r-wasm.org/">WebR</a> is a version of the R interpreter built for WebAssembly</p>
+<p>Execute R code directly in a web browser, <span class="em">without a supporting R server</span></p>
+<p><br>Alternatively, run an R process <span class="em">server-side</span> using Node.js</p>
 </div>
 </section>
 <section id="webassembly-2017" class="slide level2">
@@ -553,32 +566,6 @@ George Stagg<br>Senior Software Engineer, Posit PBC
 <div class="fragment">
 <p>Wasm/Emscripten <span class="em">looks</span> like Unix, but browser security limitations are always there.</p>
 <p>We have to work around them, replacing standard OS tools with the provided browser APIs.</p>
-</div>
-</section>
-<section id="pyodide" class="slide level2">
-<h2>Pyodide</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/pyodide.png" alt="The pyodide logo" height="350"></p>
-</figure>
-</div>
-<div style="text-align: center">
-<p><a href="https://pyodide.org/en/stable/">Pyodide</a> is a port of CPython to WebAssembly</p>
-<p><br>Pyodide makes it possible to <span class="em">install and run Python packages in the browser</span></p>
-<p>Supported scientific packages include numpy, pandas, scipy, matplotlib, and scikit-learn.</p>
-</div>
-</section>
-<section id="webr" class="slide level2">
-<h2>WebR</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/webr.png" alt="The webR logo" height="350"></p>
-</figure>
-</div>
-<div style="text-align: center">
-<p><a href="https://docs.r-wasm.org/">WebR</a> is a version of the R interpreter built for WebAssembly</p>
-<p>Execute R code directly in a web browser, <span class="em">without a supporting R server</span></p>
-<p><br>Alternatively, run an R process <span class="em">server-side</span> using Node.js</p>
 </div>
 </section>
 <section id="webr-demo-application-httpswebr.r-wasm.orgv0.2.2" class="slide level2">

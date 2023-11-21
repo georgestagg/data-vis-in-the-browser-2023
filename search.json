@@ -42,6 +42,13 @@
     "text": "Static web hosting\nSome web services offer an excellent mix of scalability, features, and cost:\n\nGithub Pages\nNetlify\nCloudflare Pages\nVercel\nQuarto Pub\nProbably lots more…\n\n\nThis is static hosting. No way to run dynamic R code on the server."
   },
   {
+    "objectID": "index.html#webr",
+    "href": "index.html#webr",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "WebR",
+    "text": "WebR\n\n\n\n\n\n\nWebR is a version of the R interpreter built for WebAssembly\nExecute R code directly in a web browser, without a supporting R server\nAlternatively, run an R process server-side using Node.js"
+  },
+  {
     "objectID": "index.html#webassembly-2017",
     "href": "index.html#webassembly-2017",
     "title": "Data Visualisation in the browser:WebAssembly & webR",
@@ -61,20 +68,6 @@
     "title": "Data Visualisation in the browser:WebAssembly & webR",
     "section": "Difficulties of Wasm",
     "text": "Difficulties of Wasm\nObservation: Many programming language interpreters are written in C or C++ for Unix/Linux…\n\nBUT: For something like Python or R it’s harder than it first seems\n\nStandard & support libraries (e.g. linear algebra)\nLegacy Fortran code\nGraphics & font support\nNetwork sockets\nLocal file I/O\nThreading and forking\nLimited methods to wait for input\n\n\n\nWasm/Emscripten looks like Unix, but browser security limitations are always there.\nWe have to work around them, replacing standard OS tools with the provided browser APIs."
-  },
-  {
-    "objectID": "index.html#pyodide",
-    "href": "index.html#pyodide",
-    "title": "Data Visualisation in the browser:WebAssembly & webR",
-    "section": "Pyodide",
-    "text": "Pyodide\n\n\n\n\n\n\nPyodide is a port of CPython to WebAssembly\nPyodide makes it possible to install and run Python packages in the browser\nSupported scientific packages include numpy, pandas, scipy, matplotlib, and scikit-learn."
-  },
-  {
-    "objectID": "index.html#webr",
-    "href": "index.html#webr",
-    "title": "Data Visualisation in the browser:WebAssembly & webR",
-    "section": "WebR",
-    "text": "WebR\n\n\n\n\n\n\nWebR is a version of the R interpreter built for WebAssembly\nExecute R code directly in a web browser, without a supporting R server\nAlternatively, run an R process server-side using Node.js"
   },
   {
     "objectID": "index.html#webr-demo-application-httpswebr.r-wasm.orgv0.2.2",
