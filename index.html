@@ -623,6 +623,15 @@ text(4, -4, "זה כתוב בעברית")`,
 <li><p>RTL text and automatic font fallback for international scripts</p></li>
 </ul>
 </section>
+<section id="notebooks-with-jupyterlite" class="slide level2">
+<h2>Notebooks with Jupyterlite</h2>
+<ul>
+<li>🔗 <a href="https://jupyter.r-wasm.org/lab/index.html" class="uri">https://jupyter.r-wasm.org/lab/index.html</a></li>
+</ul>
+<div style="text-align: center">
+<p><img data-src="images/jupyter.png" style="width: 80%"></p>
+</div>
+</section>
 <section id="the-webr-quarto-extension" class="slide level2">
 <h2>The webR Quarto extension</h2>
 <ul>
@@ -641,9 +650,10 @@ text(4, -4, "זה כתוב בעברית")`,
 <div class="sourceCode" id="cb1" style="font-size: 200%; margin-top:0em;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">quarto</span> add coatless/quarto-webr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br>In a Quarto doc,</p>
 <div class="sourceCode" id="cb2" style="font-size: 150%; margin-top:0em;"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1"></a><span class="in">```{webr-r}</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="in">fit = lm(mpg ~ am, data = mtcars)</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="in">summary(fit)</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="in">penguins |&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="in">  group_by(species, island) |&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="in">  summarise(avg_mass = mean(body_mass_g, na.rm = TRUE))</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="live-and-interactive-r-code" class="slide level2">
 <h2>Live and interactive R code</h2>
@@ -671,15 +681,6 @@ text(4, -4, "זה כתוב בעברית")`,
     { height: 180, canvas: { width: 1000, height: 500 } }
   );
 </script>
-</section>
-<section id="notebooks-with-jupyterlite" class="slide level2">
-<h2>Notebooks with Jupyterlite</h2>
-<ul>
-<li>🔗 <a href="https://jupyter.r-wasm.org/lab/index.html" class="uri">https://jupyter.r-wasm.org/lab/index.html</a></li>
-</ul>
-<div style="text-align: center">
-<p><img data-src="images/jupyter.png" style="width: 80%"></p>
-</div>
 </section>
 <section id="r-packages" class="slide level2">
 <h2>R packages</h2>

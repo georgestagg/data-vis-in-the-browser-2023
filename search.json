@@ -105,6 +105,13 @@
     "text": "Modern text rendering features and internationalisation\n\nAny font family available to the web browser can be used in plots\nAccurate font metrics for text sizing and positioning\nAdvanced text features such as ligatures & colour emoji 😃\nRTL text and automatic font fallback for international scripts"
   },
   {
+    "objectID": "index.html#notebooks-with-jupyterlite",
+    "href": "index.html#notebooks-with-jupyterlite",
+    "title": "Data Visualisation in the browser:WebAssembly & webR",
+    "section": "Notebooks with Jupyterlite",
+    "text": "Notebooks with Jupyterlite\n\n🔗 https://jupyter.r-wasm.org/lab/index.html"
+  },
+  {
     "objectID": "index.html#the-webr-quarto-extension",
     "href": "index.html#the-webr-quarto-extension",
     "title": "Data Visualisation in the browser:WebAssembly & webR",
@@ -116,7 +123,7 @@
     "href": "index.html#the-webr-quarto-extension-1",
     "title": "Data Visualisation in the browser:WebAssembly & webR",
     "section": "The webR Quarto extension",
-    "text": "The webR Quarto extension\nIn a terminal,\nquarto add coatless/quarto-webr\nIn a Quarto doc,\n```{webr-r}\nfit = lm(mpg ~ am, data = mtcars)\nsummary(fit)\n```"
+    "text": "The webR Quarto extension\nIn a terminal,\nquarto add coatless/quarto-webr\nIn a Quarto doc,\n```{webr-r}\npenguins |&gt;\n  group_by(species, island) |&gt;\n  summarise(avg_mass = mean(body_mass_g, na.rm = TRUE))\n```"
   },
   {
     "objectID": "index.html#live-and-interactive-r-code",
@@ -131,13 +138,6 @@
     "title": "Data Visualisation in the browser:WebAssembly & webR",
     "section": "Live and interactive data visualisation",
     "text": "Live and interactive data visualisation"
-  },
-  {
-    "objectID": "index.html#notebooks-with-jupyterlite",
-    "href": "index.html#notebooks-with-jupyterlite",
-    "title": "Data Visualisation in the browser:WebAssembly & webR",
-    "section": "Notebooks with Jupyterlite",
-    "text": "Notebooks with Jupyterlite\n\n🔗 https://jupyter.r-wasm.org/lab/index.html"
   },
   {
     "objectID": "index.html#r-packages",
